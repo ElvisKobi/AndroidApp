@@ -6,8 +6,6 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.Button
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -28,14 +26,13 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             Assignment2Theme {
-                val navController = rememberNavController()  // Initialize NavController
-                NavHostScreen(navController)  // Call the NavHostScreen
+                val navController = rememberNavController()
+                NavHostScreen(navController)
             }
         }
     }
 }
 
-// NavHostScreen: Defines navigation routes
 @Composable
 fun NavHostScreen(navController: NavHostController) {
     NavHost(navController = navController, startDestination = "main_screen") {
@@ -44,7 +41,6 @@ fun NavHostScreen(navController: NavHostController) {
     }
 }
 
-// MainScreen: Main activity with two buttons
 @Composable
 fun MainScreen(navController: NavController) {
     Column(
@@ -68,37 +64,43 @@ fun MainScreen(navController: NavController) {
             modifier = Modifier.padding(bottom = 24.dp)
         )
 
-        // Row to hold two buttons
         Row(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(bottom = 16.dp),
             horizontalArrangement = Arrangement.spacedBy(16.dp)
         ) {
-            // Implicit Intent-like behavior: Navigate to second screen using navigation
             Button(
                 onClick = {
-                    navController.navigate("second_screen")  // Navigate to second screen
+                    navController.navigate("second_screen")
                 },
                 modifier = Modifier.weight(1f)
             ) {
                 Text(text = "Implicit")
             }
 
-            // Explicit Intent: Navigate to second screen
             Button(
                 onClick = {
-                    navController.navigate("second_screen")  // Navigate explicitly to second screen
+                    navController.navigate("second_screen")
                 },
                 modifier = Modifier.weight(1f)
             ) {
                 Text(text = "Explicit")
             }
         }
+
+        Button(
+            onClick = {
+                val intent = Intent(navController.context, ThirdActivity::class.java)
+                navController.context.startActivity(intent)
+            },
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text(text = "View Image Activity")
+        }
     }
 }
 
-// SecondScreen: Shows challenges and a button to navigate back to the main screen
 @Composable
 fun SecondScreen(navController: NavController) {
     Column(
@@ -114,17 +116,15 @@ fun SecondScreen(navController: NavController) {
             modifier = Modifier.padding(bottom = 16.dp)
         )
 
-        // List of challenges
         Text(text = "- Device fragmentation", fontSize = 18.sp)
         Text(text = "- Battery life optimization", fontSize = 18.sp)
         Text(text = "- Security and data privacy", fontSize = 18.sp)
         Text(text = "- Performance optimization", fontSize = 18.sp)
         Text(text = "- Cross-platform compatibility", fontSize = 18.sp, modifier = Modifier.padding(bottom = 24.dp))
 
-        // Button to go back to the main screen
         Button(
             onClick = {
-                navController.navigate("main_screen")  // Navigate back to main screen
+                navController.navigate("main_screen")
             },
             modifier = Modifier.fillMaxWidth()
         ) {
