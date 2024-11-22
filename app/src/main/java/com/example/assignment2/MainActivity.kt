@@ -22,6 +22,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.assignment2.ui.theme.Assignment2Theme
 
 class MainActivity : ComponentActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -30,6 +31,8 @@ class MainActivity : ComponentActivity() {
                 NavHostScreen(navController)
             }
         }
+
+
     }
 }
 
